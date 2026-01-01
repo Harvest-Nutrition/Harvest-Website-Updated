@@ -90,7 +90,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Home Section */}
       <div className="min-h-screen" style={{ background: '#228B22' }}>
         <div
@@ -103,33 +103,44 @@ export default function Home() {
           <div className="text-center md:text-left space-y-8 md:pl-8">
             {/* Logo */}
             <div className="mb-8 flex justify-center md:justify-start">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Tree trunk */}
-                <rect x="35" y="50" width="10" height="20" fill="#8B4513" rx="2"/>
+              <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Tall, skinny trunk with bark texture */}
+                <rect x="36" y="50" width="8" height="50" fill="#5D4E37" rx="1"/>
+                {/* Bark texture lines */}
+                <rect x="36" y="55" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
+                <rect x="36" y="65" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
+                <rect x="36" y="75" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
+                <rect x="36" y="85" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
+                <rect x="36" y="95" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
 
-                {/* Leaves - Multiple layers for fullness */}
-                {/* Bottom layer */}
-                <circle cx="25" cy="45" r="8" fill="#90EE90"/>
-                <circle cx="35" cy="48" r="8" fill="#90EE90"/>
-                <circle cx="45" cy="48" r="8" fill="#90EE90"/>
-                <circle cx="55" cy="45" r="8" fill="#90EE90"/>
+                {/* Darker, more distinct leaves */}
+                {/* Bottom layer - Darkest green */}
+                <ellipse cx="22" cy="48" rx="7" ry="9" fill="#2D5016" transform="rotate(-20 22 48)"/>
+                <ellipse cx="32" cy="50" rx="8" ry="10" fill="#2D5016" transform="rotate(-10 32 50)"/>
+                <ellipse cx="48" cy="50" rx="8" ry="10" fill="#2D5016" transform="rotate(10 48 50)"/>
+                <ellipse cx="58" cy="48" rx="7" ry="9" fill="#2D5016" transform="rotate(20 58 48)"/>
 
-                {/* Middle layer */}
-                <circle cx="20" cy="35" r="8" fill="#98FB98"/>
-                <circle cx="30" cy="38" r="9" fill="#98FB98"/>
-                <circle cx="40" cy="40" r="9" fill="#98FB98"/>
-                <circle cx="50" cy="38" r="9" fill="#98FB98"/>
-                <circle cx="60" cy="35" r="8" fill="#98FB98"/>
+                {/* Middle layer - Medium dark green */}
+                <ellipse cx="18" cy="38" rx="7" ry="9" fill="#3A6B1F" transform="rotate(-25 18 38)"/>
+                <ellipse cx="28" cy="40" rx="9" ry="11" fill="#3A6B1F" transform="rotate(-12 28 40)"/>
+                <ellipse cx="40" cy="42" rx="9" ry="11" fill="#3A6B1F"/>
+                <ellipse cx="52" cy="40" rx="9" ry="11" fill="#3A6B1F" transform="rotate(12 52 40)"/>
+                <ellipse cx="62" cy="38" rx="7" ry="9" fill="#3A6B1F" transform="rotate(25 62 38)"/>
 
-                {/* Top layer */}
-                <circle cx="25" cy="25" r="8" fill="#ADFF2F"/>
-                <circle cx="35" cy="28" r="9" fill="#ADFF2F"/>
-                <circle cx="40" cy="25" r="10" fill="#ADFF2F"/>
-                <circle cx="45" cy="28" r="9" fill="#ADFF2F"/>
-                <circle cx="55" cy="25" r="8" fill="#ADFF2F"/>
+                {/* Upper layer - Forest green */}
+                <ellipse cx="25" cy="28" rx="7" ry="9" fill="#228B22" transform="rotate(-18 25 28)"/>
+                <ellipse cx="35" cy="30" rx="8" ry="10" fill="#228B22" transform="rotate(-8 35 30)"/>
+                <ellipse cx="40" cy="28" rx="9" ry="11" fill="#228B22"/>
+                <ellipse cx="45" cy="30" rx="8" ry="10" fill="#228B22" transform="rotate(8 45 30)"/>
+                <ellipse cx="55" cy="28" rx="7" ry="9" fill="#228B22" transform="rotate(18 55 28)"/>
 
-                {/* Center top accent */}
-                <circle cx="40" cy="18" r="8" fill="#7FFF00"/>
+                {/* Top layer - Medium green */}
+                <ellipse cx="30" cy="20" rx="6" ry="8" fill="#32CD32" transform="rotate(-15 30 20)"/>
+                <ellipse cx="40" cy="18" rx="8" ry="10" fill="#32CD32"/>
+                <ellipse cx="50" cy="20" rx="6" ry="8" fill="#32CD32" transform="rotate(15 50 20)"/>
+
+                {/* Top accent - Brightest */}
+                <ellipse cx="40" cy="10" rx="6" ry="8" fill="#3CB371"/>
               </svg>
             </div>
 
@@ -141,7 +152,7 @@ export default function Home() {
                 onClick={handleOpen}
                 className="px-8 sm:px-12 py-4 bg-white text-green-800 text-base sm:text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
               >
-                Sign up for our waitlist!
+                Join the Waitlist!
               </button>
               <button
                 onClick={scrollToAbout}
@@ -152,7 +163,7 @@ export default function Home() {
             </div>
 
             {/* Mobile iPhone - Shows below buttons on mobile */}
-            <div className="flex md:hidden justify-center items-center mt-12">
+            <div className="flex md:hidden justify-center items-center mt-12 mb-12">
               <div className="relative">
                 {/* iPhone 14 Pro Outline - Mobile Size */}
                 <svg
@@ -291,22 +302,25 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Gradient Transition */}
+      <div className="h-32" style={{ background: 'linear-gradient(to bottom, #228B22, white)' }}></div>
+
       {/* About Us Section */}
       <div id="about" className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 min-h-screen flex items-center justify-center">
-          <div className="flex items-center gap-8 max-w-4xl">
+        <div className="container mx-auto px-4 min-h-screen flex items-start md:items-center justify-center pt-16 md:pt-0">
+          <div className="flex items-center gap-4 md:gap-8 max-w-4xl">
             {/* Dark Green Square */}
             <div
-              className="w-64 h-64 rounded-lg"
+              className="w-32 h-32 md:w-64 md:h-64 rounded-lg flex-shrink-0"
               style={{ background: '#228B22' }}
             ></div>
 
             {/* Text Content */}
             <div className="text-left">
-              <div className="text-8xl font-bold mb-4" style={{ color: '#228B22' }}>
+              <div className="text-4xl md:text-8xl font-bold mb-2 md:mb-4" style={{ color: '#228B22' }}>
                 1
               </div>
-              <div className="text-3xl font-semibold" style={{ color: '#228B22' }}>
+              <div className="text-lg md:text-3xl font-semibold" style={{ color: '#228B22' }}>
                 Meet your Macros for Less
               </div>
             </div>
@@ -324,7 +338,7 @@ export default function Home() {
           onClick={handleOpen}
           className="px-8 py-4 bg-white text-green-800 text-base rounded-full font-semibold shadow-2xl hover:bg-gray-100 transition transform hover:scale-105"
         >
-          Sign up for our waitlist!
+          Join the Waitlist!
         </button>
       </div>
 
