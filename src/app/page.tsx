@@ -207,68 +207,22 @@ export default function Home() {
 
       {/* About Us Section */}
       <div id="about" className="min-h-screen bg-white">
-        <div className="container mx-auto px-4 min-h-screen flex items-center">
-          <div className="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
-            {/* Left Side - Tree Logo */}
-            <div className="hidden md:flex justify-start items-center md:pl-8">
-              <div className="relative">
-                <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
-                  {/* Larger Tree trunk */}
-                  <rect x="175" y="250" width="50" height="100" fill="#8B4513" rx="5"/>
+        <div className="container mx-auto px-4 min-h-screen flex items-center justify-center">
+          <div className="flex items-center gap-8 max-w-4xl">
+            {/* Dark Green Square */}
+            <div
+              className="w-64 h-64 rounded-lg"
+              style={{ background: '#228B22' }}
+            ></div>
 
-                  {/* Leaves - Multiple layers for fullness */}
-                  {/* Bottom layer */}
-                  <circle cx="125" cy="225" r="40" fill="#90EE90"/>
-                  <circle cx="175" cy="240" r="40" fill="#90EE90"/>
-                  <circle cx="225" cy="240" r="40" fill="#90EE90"/>
-                  <circle cx="275" cy="225" r="40" fill="#90EE90"/>
-
-                  {/* Middle layer */}
-                  <circle cx="100" cy="175" r="40" fill="#98FB98"/>
-                  <circle cx="150" cy="190" r="45" fill="#98FB98"/>
-                  <circle cx="200" cy="200" r="45" fill="#98FB98"/>
-                  <circle cx="250" cy="190" r="45" fill="#98FB98"/>
-                  <circle cx="300" cy="175" r="40" fill="#98FB98"/>
-
-                  {/* Top layer */}
-                  <circle cx="125" cy="125" r="40" fill="#ADFF2F"/>
-                  <circle cx="175" cy="140" r="45" fill="#ADFF2F"/>
-                  <circle cx="200" cy="125" r="50" fill="#ADFF2F"/>
-                  <circle cx="225" cy="140" r="45" fill="#ADFF2F"/>
-                  <circle cx="275" cy="125" r="40" fill="#ADFF2F"/>
-
-                  {/* Center top accent */}
-                  <circle cx="200" cy="90" r="40" fill="#228B22"/>
-                </svg>
+            {/* Text Content */}
+            <div className="text-left">
+              <div className="text-8xl font-bold mb-4" style={{ color: '#228B22' }}>
+                1
               </div>
-            </div>
-
-            {/* Right Side - About Content */}
-            <div className="text-left space-y-8 md:pr-8">
-              <h2 className="text-5xl md:text-6xl font-bold leading-tight" style={{ color: '#228B22' }}>
-                About Us
-              </h2>
-              <div className="space-y-6 text-gray-700 text-lg">
-                <p>
-                  At Harvest Nutrition, we believe that healthy eating should be accessible, affordable, and easy to manage.
-                </p>
-                <p>
-                  Our mission is to revolutionize the way you approach nutrition budgeting by combining cutting-edge technology with personalized insights.
-                </p>
-                <p>
-                  Whether you're tracking macros, planning meals, or managing your food budget, we're here to help you cultivate a healthier lifestyle.
-                </p>
-                <p className="font-semibold" style={{ color: '#228B22' }}>
-                  Join us on our journey to make nutrition simple, sustainable, and smart.
-                </p>
+              <div className="text-3xl font-semibold" style={{ color: '#228B22' }}>
+                Meet your Macros for Less
               </div>
-              <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-12 py-4 text-white text-lg rounded-full font-semibold hover:opacity-90 transition shadow-lg hover:shadow-xl transform hover:scale-105"
-                style={{ background: '#228B22' }}
-              >
-                Back to Top
-              </button>
             </div>
           </div>
         </div>
