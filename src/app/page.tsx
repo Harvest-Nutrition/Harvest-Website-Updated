@@ -67,20 +67,59 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen" style={{ background: '#228B22' }}>
       <div className="container mx-auto px-4 min-h-screen flex items-center">
         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
           {/* Left Side - Text and Button */}
           <div className="text-left space-y-8">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
+            {/* Logo */}
+            <div className="mb-8">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Tree trunk */}
+                <rect x="35" y="50" width="10" height="20" fill="#8B4513" rx="2"/>
+
+                {/* Leaves - Multiple layers for fullness */}
+                {/* Bottom layer */}
+                <circle cx="25" cy="45" r="8" fill="#90EE90"/>
+                <circle cx="35" cy="48" r="8" fill="#90EE90"/>
+                <circle cx="45" cy="48" r="8" fill="#90EE90"/>
+                <circle cx="55" cy="45" r="8" fill="#90EE90"/>
+
+                {/* Middle layer */}
+                <circle cx="20" cy="35" r="8" fill="#98FB98"/>
+                <circle cx="30" cy="38" r="9" fill="#98FB98"/>
+                <circle cx="40" cy="40" r="9" fill="#98FB98"/>
+                <circle cx="50" cy="38" r="9" fill="#98FB98"/>
+                <circle cx="60" cy="35" r="8" fill="#98FB98"/>
+
+                {/* Top layer */}
+                <circle cx="25" cy="25" r="8" fill="#ADFF2F"/>
+                <circle cx="35" cy="28" r="9" fill="#ADFF2F"/>
+                <circle cx="40" cy="25" r="10" fill="#ADFF2F"/>
+                <circle cx="45" cy="28" r="9" fill="#ADFF2F"/>
+                <circle cx="55" cy="25" r="8" fill="#ADFF2F"/>
+
+                {/* Center top accent */}
+                <circle cx="40" cy="18" r="8" fill="#7FFF00"/>
+              </svg>
+            </div>
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               The Future of Nutrition Budgeting
             </h1>
-            <button
-              onClick={handleOpen}
-              className="px-12 py-4 bg-green-600 text-white text-lg rounded-full font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Sign up for our waitlist!
-            </button>
+            <div className="flex gap-4">
+              <button
+                onClick={handleOpen}
+                className="px-12 py-4 bg-white text-green-800 text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                Sign up for our waitlist!
+              </button>
+              <button
+                className="px-12 py-4 bg-transparent border-2 border-white text-white text-lg rounded-full font-semibold hover:bg-white hover:text-green-800 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                About Us
+              </button>
+            </div>
           </div>
 
           {/* Right Side - iPhone Outline */}
