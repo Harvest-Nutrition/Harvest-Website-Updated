@@ -67,17 +67,90 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
-      <div className="text-center max-w-4xl">
-        <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8">
-          The Future of Nutrition Budgeting
-        </h1>
-        <button
-          onClick={handleOpen}
-          className="px-12 py-4 bg-green-600 text-white text-lg rounded-full font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
-        >
-          Sign up for our waitlist!
-        </button>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 min-h-screen flex items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
+          {/* Left Side - Text and Button */}
+          <div className="text-left space-y-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
+              The Future of Nutrition Budgeting
+            </h1>
+            <button
+              onClick={handleOpen}
+              className="px-12 py-4 bg-green-600 text-white text-lg rounded-full font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              Sign up for our waitlist!
+            </button>
+          </div>
+
+          {/* Right Side - iPhone Outline */}
+          <div className="hidden md:flex justify-center items-center">
+            <div className="relative">
+              {/* iPhone 14 Pro Outline */}
+              <svg
+                width="300"
+                height="600"
+                viewBox="0 0 300 600"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="drop-shadow-2xl"
+              >
+                {/* iPhone Body */}
+                <rect
+                  x="10"
+                  y="10"
+                  width="280"
+                  height="580"
+                  rx="50"
+                  stroke="#1f2937"
+                  strokeWidth="8"
+                  fill="white"
+                />
+
+                {/* Screen */}
+                <rect
+                  x="20"
+                  y="20"
+                  width="260"
+                  height="560"
+                  rx="45"
+                  fill="#f9fafb"
+                />
+
+                {/* Dynamic Island */}
+                <rect
+                  x="100"
+                  y="30"
+                  width="100"
+                  height="35"
+                  rx="17.5"
+                  fill="#1f2937"
+                />
+
+                {/* App Content Mockup - Green themed */}
+                <g>
+                  {/* Header */}
+                  <rect x="40" y="90" width="220" height="40" rx="8" fill="#dcfce7" />
+
+                  {/* Cards */}
+                  <rect x="40" y="150" width="220" height="80" rx="12" fill="#bbf7d0" />
+                  <rect x="40" y="245" width="220" height="80" rx="12" fill="#86efac" />
+                  <rect x="40" y="340" width="220" height="80" rx="12" fill="#4ade80" />
+
+                  {/* Bottom Navigation Bar */}
+                  <rect x="40" y="530" width="220" height="30" rx="15" fill="#22c55e" />
+                </g>
+
+                {/* Volume Buttons */}
+                <rect x="0" y="120" width="6" height="50" rx="3" fill="#1f2937" />
+                <rect x="0" y="180" width="6" height="50" rx="3" fill="#1f2937" />
+
+                {/* Power Button */}
+                <rect x="294" y="150" width="6" height="70" rx="3" fill="#1f2937" />
+              </svg>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Modal */}
