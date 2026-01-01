@@ -1,98 +1,146 @@
-import Link from "next/link";
+'use client';
+
+import { useState, FormEvent } from 'react';
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleOpen = () => {
+    setShowModal(true);
+    setSubmitStatus(null);
+    setStatusMessage('');
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setEmail('');
+    setSubmitStatus(null);
+    setStatusMessage('');
+    setIsSubmitting(false);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    setStatusMessage('');
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setStatusMessage(
+          data.alreadyExists
+            ? 'You are already on the waitlist!'
+            : 'Successfully added to waitlist!'
+        );
+        setEmail('');
+
+        // Close modal after 2 seconds on success
+        setTimeout(() => {
+          handleClose();
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+        setStatusMessage(data.error || 'Failed to join waitlist. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
+      setSubmitStatus('error');
+      setStatusMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
-      {/* Navigation */}
-      <nav className="border-b border-green-200 dark:border-gray-700 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center">
-              <h1 className="text-2xl font-bold text-green-700 dark:text-green-400">🌱 Harvest Nutrition</h1>
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition">
-                About
-              </Link>
-              <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
+      <div className="text-center max-w-4xl">
+        <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8">
+          The Future of Nutrition Budgeting
+        </h1>
+        <button
+          onClick={handleOpen}
+          className="px-12 py-4 bg-green-600 text-white text-lg rounded-full font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
+          Sign up for our waitlist!
+        </button>
+      </div>
 
-      {/* Hero Section */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center">
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-            Welcome to Harvest Nutrition
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-            Your journey to healthy living starts here. Discover nutritious recipes, 
-            personalized meal plans, and expert wellness tips.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/about"
-              className="px-8 py-3 bg-green-600 text-white rounded-full font-semibold hover:bg-green-700 transition shadow-lg hover:shadow-xl"
-            >
-              Learn More
-            </Link>
-            <Link
-              href="/contact"
-              className="px-8 py-3 bg-white dark:bg-gray-800 text-green-600 dark:text-green-400 rounded-full font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition border-2 border-green-600 dark:border-green-400"
-            >
-              Get Started
-            </Link>
-          </div>
-        </div>
+      {/* Modal */}
+      {showModal && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+          onClick={handleClose}
+        >
+          <div
+            className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Join Our Waitlist
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Be the first to know when we launch!
+            </p>
 
-        {/* Features Section */}
-        <div className="mt-24 grid md:grid-cols-3 gap-8">
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-            <div className="text-4xl mb-4">🥗</div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Healthy Recipes
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Explore our collection of delicious and nutritious recipes designed for optimal health.
-            </p>
-          </div>
-          
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-            <div className="text-4xl mb-4">📊</div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Meal Planning
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Get personalized meal plans tailored to your dietary needs and goals.
-            </p>
-          </div>
-          
-          <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition">
-            <div className="text-4xl mb-4">💪</div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-              Wellness Tips
-            </h3>
-            <p className="text-gray-600 dark:text-gray-400">
-              Learn from experts about nutrition, fitness, and maintaining a healthy lifestyle.
-            </p>
-          </div>
-        </div>
-      </main>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                disabled={isSubmitting}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 dark:bg-gray-700 dark:text-white disabled:opacity-50"
+              />
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-gray-600 dark:text-gray-400">
-            © 2025 Harvest Nutrition. All rights reserved.
-          </p>
+              {statusMessage && (
+                <div
+                  className={`mb-4 p-3 rounded-lg text-sm ${
+                    submitStatus === 'success'
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                      : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                  }`}
+                >
+                  {statusMessage}
+                </div>
+              )}
+
+              <div className="flex gap-3">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  disabled={isSubmitting}
+                  className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </footer>
+      )}
     </div>
   );
 }
