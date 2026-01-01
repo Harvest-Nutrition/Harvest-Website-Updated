@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
@@ -18,12 +21,21 @@ export async function POST(req: NextRequest) {
     const accessKey = process.env.WAITLIST_AWS_KEY;
     const secretKey = process.env.WAITLIST_AWS_SECRET;
 
+    // Debug logging (will show in Amplify logs)
+    console.log('Environment check:', {
+      hasAccessKey: !!accessKey,
+      hasSecretKey: !!secretKey,
+      accessKeyPrefix: accessKey?.substring(0, 4),
+    });
+
     // Credential validation
     if (!accessKey || !secretKey) {
       return NextResponse.json(
         {
           error: 'Configuration error',
           details: 'AWS credentials not configured',
+          hasAccessKey: !!accessKey,
+          hasSecretKey: !!secretKey,
         },
         { status: 500 }
       );
