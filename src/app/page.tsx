@@ -92,7 +92,12 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden">
       {/* Home Section */}
-      <div className="min-h-screen" style={{ background: '#228B22' }}>
+      <div
+        className="min-h-screen"
+        style={{
+          background: 'linear-gradient(to bottom, #228B22 0%, #2a9d2a 20%, #3db03d 40%, #52c252 60%, #6dd46d 80%, #89e589 90%, #a8f0a8 100%)'
+        }}
+      >
         <div
           className={`container mx-auto px-4 min-h-screen flex items-center transition-all duration-500 ${
             showModal ? 'blur-md scale-105' : 'blur-0 scale-100'
@@ -101,49 +106,6 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
           {/* Left Side (Desktop) / Top (Mobile) - Text and Buttons */}
           <div className="text-center md:text-left space-y-8 md:pl-8">
-            {/* Logo */}
-            <div className="mb-8 flex justify-center md:justify-start">
-              <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Tall, skinny trunk with bark texture */}
-                <rect x="36" y="50" width="8" height="50" fill="#5D4E37" rx="1"/>
-                {/* Bark texture lines */}
-                <rect x="36" y="55" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
-                <rect x="36" y="65" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
-                <rect x="36" y="75" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
-                <rect x="36" y="85" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
-                <rect x="36" y="95" width="8" height="1" fill="#4A3C2A" opacity="0.6"/>
-
-                {/* Darker, more distinct leaves */}
-                {/* Bottom layer - Darkest green */}
-                <ellipse cx="22" cy="48" rx="7" ry="9" fill="#2D5016" transform="rotate(-20 22 48)"/>
-                <ellipse cx="32" cy="50" rx="8" ry="10" fill="#2D5016" transform="rotate(-10 32 50)"/>
-                <ellipse cx="48" cy="50" rx="8" ry="10" fill="#2D5016" transform="rotate(10 48 50)"/>
-                <ellipse cx="58" cy="48" rx="7" ry="9" fill="#2D5016" transform="rotate(20 58 48)"/>
-
-                {/* Middle layer - Medium dark green */}
-                <ellipse cx="18" cy="38" rx="7" ry="9" fill="#3A6B1F" transform="rotate(-25 18 38)"/>
-                <ellipse cx="28" cy="40" rx="9" ry="11" fill="#3A6B1F" transform="rotate(-12 28 40)"/>
-                <ellipse cx="40" cy="42" rx="9" ry="11" fill="#3A6B1F"/>
-                <ellipse cx="52" cy="40" rx="9" ry="11" fill="#3A6B1F" transform="rotate(12 52 40)"/>
-                <ellipse cx="62" cy="38" rx="7" ry="9" fill="#3A6B1F" transform="rotate(25 62 38)"/>
-
-                {/* Upper layer - Forest green */}
-                <ellipse cx="25" cy="28" rx="7" ry="9" fill="#228B22" transform="rotate(-18 25 28)"/>
-                <ellipse cx="35" cy="30" rx="8" ry="10" fill="#228B22" transform="rotate(-8 35 30)"/>
-                <ellipse cx="40" cy="28" rx="9" ry="11" fill="#228B22"/>
-                <ellipse cx="45" cy="30" rx="8" ry="10" fill="#228B22" transform="rotate(8 45 30)"/>
-                <ellipse cx="55" cy="28" rx="7" ry="9" fill="#228B22" transform="rotate(18 55 28)"/>
-
-                {/* Top layer - Medium green */}
-                <ellipse cx="30" cy="20" rx="6" ry="8" fill="#32CD32" transform="rotate(-15 30 20)"/>
-                <ellipse cx="40" cy="18" rx="8" ry="10" fill="#32CD32"/>
-                <ellipse cx="50" cy="20" rx="6" ry="8" fill="#32CD32" transform="rotate(15 50 20)"/>
-
-                {/* Top accent - Brightest */}
-                <ellipse cx="40" cy="10" rx="6" ry="8" fill="#3CB371"/>
-              </svg>
-            </div>
-
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               The Future of Nutrition Budgeting
             </h1>
@@ -303,7 +265,7 @@ export default function Home() {
       </div>
 
       {/* Gradient Transition */}
-      <div className="h-32" style={{ background: 'linear-gradient(to bottom, #228B22, white)' }}></div>
+      <div className="h-32" style={{ background: 'linear-gradient(to bottom, #a8f0a8, white)' }}></div>
 
       {/* About Us Section */}
       <div id="about" className="min-h-screen bg-white">
