@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
@@ -8,6 +8,24 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
   const [statusMessage, setStatusMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show button when scrolled past the home section (viewport height)
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+
+      if (scrollPosition > viewportHeight * 0.7) {
+        setShowFloatingButton(true);
+      } else {
+        setShowFloatingButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleOpen = () => {
     setShowModal(true);
@@ -81,10 +99,10 @@ export default function Home() {
           }`}
         >
         <div className="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
-          {/* Left Side - Text and Button */}
-          <div className="text-left space-y-8 md:pl-8">
+          {/* Left Side (Desktop) / Top (Mobile) - Text and Buttons */}
+          <div className="text-center md:text-left space-y-8 md:pl-8">
             {/* Logo */}
-            <div className="mb-8">
+            <div className="mb-8 flex justify-center md:justify-start">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Tree trunk */}
                 <rect x="35" y="50" width="10" height="20" fill="#8B4513" rx="2"/>
@@ -115,26 +133,94 @@ export default function Home() {
               </svg>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               The Future of Nutrition Budgeting
             </h1>
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <button
                 onClick={handleOpen}
-                className="px-12 py-4 bg-white text-green-800 text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-8 sm:px-12 py-4 bg-white text-green-800 text-base sm:text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 Sign up for our waitlist!
               </button>
               <button
                 onClick={scrollToAbout}
-                className="px-12 py-4 bg-white text-green-800 text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-8 sm:px-12 py-4 bg-white text-green-800 text-base sm:text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 About Us
               </button>
             </div>
+
+            {/* Mobile iPhone - Shows below buttons on mobile */}
+            <div className="flex md:hidden justify-center items-center mt-12">
+              <div className="relative">
+                {/* iPhone 14 Pro Outline - Mobile Size */}
+                <svg
+                  width="250"
+                  height="500"
+                  viewBox="0 0 300 600"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="drop-shadow-2xl"
+                >
+                  {/* iPhone Body */}
+                  <rect
+                    x="10"
+                    y="10"
+                    width="280"
+                    height="580"
+                    rx="50"
+                    stroke="#1f2937"
+                    strokeWidth="8"
+                    fill="white"
+                  />
+
+                  {/* Screen */}
+                  <rect
+                    x="20"
+                    y="20"
+                    width="260"
+                    height="560"
+                    rx="45"
+                    fill="#f9fafb"
+                  />
+
+                  {/* Dynamic Island */}
+                  <rect
+                    x="100"
+                    y="30"
+                    width="100"
+                    height="35"
+                    rx="17.5"
+                    fill="#1f2937"
+                  />
+
+                  {/* App Content Mockup - Green themed */}
+                  <g>
+                    {/* Header */}
+                    <rect x="40" y="90" width="220" height="40" rx="8" fill="#dcfce7" />
+
+                    {/* Cards */}
+                    <rect x="40" y="150" width="220" height="80" rx="12" fill="#bbf7d0" />
+                    <rect x="40" y="245" width="220" height="80" rx="12" fill="#86efac" />
+                    <rect x="40" y="340" width="220" height="80" rx="12" fill="#4ade80" />
+
+                    {/* Bottom Navigation Bar */}
+                    <rect x="40" y="530" width="220" height="30" rx="15" fill="#22c55e" />
+                  </g>
+
+                  {/* Volume Buttons */}
+                  <rect x="0" y="120" width="6" height="50" rx="3" fill="#1f2937" />
+                  <rect x="0" y="180" width="6" height="50" rx="3" fill="#1f2937" />
+
+                  {/* Power Button */}
+                  <rect x="294" y="150" width="6" height="70" rx="3" fill="#1f2937" />
+                </svg>
+              </div>
+            </div>
           </div>
 
-          {/* Right Side - iPhone Outline */}
+          {/* Right Side (Desktop only) - iPhone Outline */}
           <div className="hidden md:flex justify-end items-center md:pr-8">
             <div className="relative">
               {/* iPhone 14 Pro Outline */}
@@ -226,6 +312,20 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Floating Waitlist Button - Mobile Only */}
+      <div
+        className={`md:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 transition-all duration-500 ${
+          showFloatingButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20 pointer-events-none'
+        }`}
+      >
+        <button
+          onClick={handleOpen}
+          className="px-8 py-4 bg-white text-green-800 text-base rounded-full font-semibold shadow-2xl hover:bg-gray-100 transition transform hover:scale-105"
+        >
+          Sign up for our waitlist!
+        </button>
       </div>
 
       {/* Modal */}
