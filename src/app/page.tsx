@@ -66,12 +66,23 @@ export default function Home() {
     }
   };
 
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById('about');
+    aboutSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen" style={{ background: '#228B22' }}>
-      <div className="container mx-auto px-4 min-h-screen flex items-center">
-        <div className="grid md:grid-cols-2 gap-12 items-center w-full">
+    <div>
+      {/* Home Section */}
+      <div className="min-h-screen" style={{ background: '#228B22' }}>
+        <div
+          className={`container mx-auto px-4 min-h-screen flex items-center transition-all duration-500 ${
+            showModal ? 'blur-md scale-105' : 'blur-0 scale-100'
+          }`}
+        >
+        <div className="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
           {/* Left Side - Text and Button */}
-          <div className="text-left space-y-8">
+          <div className="text-left space-y-8 md:pl-8">
             {/* Logo */}
             <div className="mb-8">
               <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +126,8 @@ export default function Home() {
                 Sign up for our waitlist!
               </button>
               <button
-                className="px-12 py-4 bg-transparent border-2 border-white text-white text-lg rounded-full font-semibold hover:bg-white hover:text-green-800 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+                onClick={scrollToAbout}
+                className="px-12 py-4 bg-white text-green-800 text-lg rounded-full font-semibold hover:bg-gray-100 transition shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 About Us
               </button>
@@ -123,7 +135,7 @@ export default function Home() {
           </div>
 
           {/* Right Side - iPhone Outline */}
-          <div className="hidden md:flex justify-center items-center">
+          <div className="hidden md:flex justify-end items-center md:pr-8">
             <div className="relative">
               {/* iPhone 14 Pro Outline */}
               <svg
@@ -190,21 +202,108 @@ export default function Home() {
             </div>
           </div>
         </div>
+        </div>
+      </div>
+
+      {/* About Us Section */}
+      <div id="about" className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 min-h-screen flex items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
+            {/* Left Side - Tree Logo */}
+            <div className="hidden md:flex justify-start items-center md:pl-8">
+              <div className="relative">
+                <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
+                  {/* Larger Tree trunk */}
+                  <rect x="175" y="250" width="50" height="100" fill="#8B4513" rx="5"/>
+
+                  {/* Leaves - Multiple layers for fullness */}
+                  {/* Bottom layer */}
+                  <circle cx="125" cy="225" r="40" fill="#90EE90"/>
+                  <circle cx="175" cy="240" r="40" fill="#90EE90"/>
+                  <circle cx="225" cy="240" r="40" fill="#90EE90"/>
+                  <circle cx="275" cy="225" r="40" fill="#90EE90"/>
+
+                  {/* Middle layer */}
+                  <circle cx="100" cy="175" r="40" fill="#98FB98"/>
+                  <circle cx="150" cy="190" r="45" fill="#98FB98"/>
+                  <circle cx="200" cy="200" r="45" fill="#98FB98"/>
+                  <circle cx="250" cy="190" r="45" fill="#98FB98"/>
+                  <circle cx="300" cy="175" r="40" fill="#98FB98"/>
+
+                  {/* Top layer */}
+                  <circle cx="125" cy="125" r="40" fill="#ADFF2F"/>
+                  <circle cx="175" cy="140" r="45" fill="#ADFF2F"/>
+                  <circle cx="200" cy="125" r="50" fill="#ADFF2F"/>
+                  <circle cx="225" cy="140" r="45" fill="#ADFF2F"/>
+                  <circle cx="275" cy="125" r="40" fill="#ADFF2F"/>
+
+                  {/* Center top accent */}
+                  <circle cx="200" cy="90" r="40" fill="#228B22"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Right Side - About Content */}
+            <div className="text-left space-y-8 md:pr-8">
+              <h2 className="text-5xl md:text-6xl font-bold leading-tight" style={{ color: '#228B22' }}>
+                About Us
+              </h2>
+              <div className="space-y-6 text-gray-700 text-lg">
+                <p>
+                  At Harvest Nutrition, we believe that healthy eating should be accessible, affordable, and easy to manage.
+                </p>
+                <p>
+                  Our mission is to revolutionize the way you approach nutrition budgeting by combining cutting-edge technology with personalized insights.
+                </p>
+                <p>
+                  Whether you're tracking macros, planning meals, or managing your food budget, we're here to help you cultivate a healthier lifestyle.
+                </p>
+                <p className="font-semibold" style={{ color: '#228B22' }}>
+                  Join us on our journey to make nutrition simple, sustainable, and smart.
+                </p>
+              </div>
+              <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="px-12 py-4 text-white text-lg rounded-full font-semibold hover:opacity-90 transition shadow-lg hover:shadow-xl transform hover:scale-105"
+                style={{ background: '#228B22' }}
+              >
+                Back to Top
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Modal */}
       {showModal && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center p-4 z-50 animate-fadeIn"
           onClick={handleClose}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') handleClose();
+          }}
+          tabIndex={0}
         >
           <div
-            className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full shadow-2xl"
+            className="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full shadow-2xl animate-scaleIn"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Join Our Waitlist
-            </h2>
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                  Join Our Waitlist
+                </h2>
+              </div>
+              <button
+                onClick={handleClose}
+                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition"
+                aria-label="Close"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               Be the first to know when we launch!
             </p>
