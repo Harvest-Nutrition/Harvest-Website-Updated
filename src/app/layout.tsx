@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Harvest Nutrition - The Future of Nutrition Budgeting",
   description: "Discover nutritious recipes, meal plans, and wellness tips with Harvest Nutrition",
+  icons: {
+    icon: '/logoharvest.jpg',
+  },
 };
 
 export default function RootLayout({
